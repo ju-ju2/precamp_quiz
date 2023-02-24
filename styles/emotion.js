@@ -132,8 +132,3 @@ export const NaviName = styled.div`
   font-size: 16px;
   color: #adadad;
 `;
-
-export const Error = styled.div`
-  font-size: 10px;
-  color: red;
-`;
