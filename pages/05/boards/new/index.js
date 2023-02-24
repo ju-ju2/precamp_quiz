@@ -1,7 +1,23 @@
 import { Error } from "@/styles/emotion";
+import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 
+const CREATE_PRODUCT = gql`
+  mutation typeSetting(
+    $seller: String
+    $createProductInput: CreateProductInput!
+  ) {
+    createProduct(seller: $seller, createProductInput: $createProductInput) {
+      _id
+      number
+      message
+    }
+  }
+`;
+
 export default function ItemUpload() {
+  const [getCreateProduct] = useMutation(CREATE_PRODUCT);
+
   const [seller, setSeller] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
@@ -37,7 +53,7 @@ export default function ItemUpload() {
     }
   };
 
-  const onClickUploadItem = () => {
+  const onClickUploadItem = async () => {
     if (!seller) {
       setSellerError("판매자를 입력해주세요");
     }
@@ -51,7 +67,20 @@ export default function ItemUpload() {
       setPriceError("상품가격을 입력해주세요");
     }
     if (seller && title && contents && price) {
-      alert("상품등록이 완료되었습니다");
+      const result = await getCreateProduct({
+        variables: {
+          seller: seller,
+          createProductInput: {
+            name: title,
+            detail: contents,
+            price: Number(price),
+          },
+        },
+      });
+      console.log(result);
+      console.log(result.data.createProduct._id);
+
+      alert(result.data.createProduct.message);
     }
   };
 
