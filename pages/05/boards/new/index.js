@@ -1,5 +1,6 @@
 import { Error } from "@/styles/emotion";
 import { gql, useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 const CREATE_PRODUCT = gql`
@@ -17,6 +18,7 @@ const CREATE_PRODUCT = gql`
 
 export default function ItemUpload() {
   const [getCreateProduct] = useMutation(CREATE_PRODUCT);
+  const router = useRouter();
 
   const [seller, setSeller] = useState("");
   const [title, setTitle] = useState("");
@@ -81,6 +83,7 @@ export default function ItemUpload() {
       console.log(result.data.createProduct._id);
 
       alert(result.data.createProduct.message);
+      router.push(`/05/boards/${result.data.createProduct._id}`);
     }
   };
 
