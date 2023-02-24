@@ -71,7 +71,7 @@ export default function BoardWrite() {
       console.log(result.data.createProduct._id);
 
       alert(result.data.createProduct.message);
-      router.push(`/05/boards/${result.data.createProduct._id}`);
+      router.push(`/06/boards/${result.data.createProduct._id}`);
     }
   };
 
