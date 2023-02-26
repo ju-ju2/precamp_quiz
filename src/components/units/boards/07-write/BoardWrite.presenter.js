@@ -1,4 +1,4 @@
-import { Error } from "./BoardWrite.styles";
+import { Error, UploadButton } from "./BoardWrite.styles";
 
 export default function BoardWriteUI(props) {
   return (
@@ -15,9 +15,13 @@ export default function BoardWriteUI(props) {
       상품가격: <input type="text" onChange={props.onChangePrice}></input>
       <br />
       <Error>{props.priceError}</Error>
-      <button id="uploadButton" onClick={props.onClickUploadItem}>
+      <UploadButton
+        id="uploadButton"
+        onClick={props.onClickUploadItem}
+        buttonColor={props.buttonColor}
+      >
         상품등록
-      </button>
+      </UploadButton>
     </>
   );
 }

@@ -18,10 +18,15 @@ export default function BoardWrite() {
   const [contentsError, setContentsError] = useState("");
   const [priceError, setPriceError] = useState("");
 
+  const [buttonColor, setButtonColor] = useState(false);
+
   const onChangeSeller = (event) => {
     setSeller(event.target.value);
     if (event.target.value) {
       setSellerError("");
+    }
+    if (event.target.value && title && contents && price) {
+      setButtonColor(true);
     }
   };
   const onChangeTitle = (event) => {
@@ -29,17 +34,26 @@ export default function BoardWrite() {
     if (event.target.value) {
       setTitleError("");
     }
+    if (seller && event.target.value && contents && price) {
+      setButtonColor(true);
+    }
   };
   const onChangeContents = (event) => {
     setContents(event.target.value);
     if (event.target.value) {
       setContentsError("");
     }
+    if (seller && title && event.target.value && price) {
+      setButtonColor(true);
+    }
   };
   const onChangePrice = (event) => {
     setPrice(event.target.value);
     if (event.target.value) {
       setPriceError("");
+    }
+    if (seller && title && contents && event.target.value) {
+      setButtonColor(true);
     }
   };
 
@@ -86,6 +100,7 @@ export default function BoardWrite() {
       titleError={titleError}
       contentsError={contentsError}
       priceError={priceError}
+      buttonColor={buttonColor}
     />
   );
 }
