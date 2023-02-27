@@ -38,14 +38,16 @@ export default function Component08(props) {
     }
   };
 
+  const myVariable = {
+    number: Number(router.query.detail),
+  };
+  if (writer) myVariable.writer = writer;
+  if (title) myVariable.title = title;
+  if (contents) myVariable.contents = contents;
+
   const onClickEdit = async () => {
     const result = await updateBoard({
-      variables: {
-        number: Number(router.query.detail),
-        writer,
-        title,
-        contents,
-      },
+      variables: myVariable,
     });
     alert("수정완료");
     router.push(`/08/boards/${result.data.updateBoard.number}`);
@@ -60,6 +62,7 @@ export default function Component08(props) {
         onClickUpload={onClickUpload}
         onClickEdit={onClickEdit}
         isEdit={props.isEdit}
+        data={props.data}
       />
     </>
   );
