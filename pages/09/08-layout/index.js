@@ -6,13 +6,16 @@ import Header from "@/src/components/commons/layout/header";
 import Navigation from "@/src/components/commons/layout/navigation";
 import Sidebar from "@/src/components/commons/layout/sidebar";
 import { Global } from "@emotion/react";
+import Carousel from "./carousel";
 
 export default function LayoutPage(props) {
   return (
     <div>
       <Global styles={globalStyle} />
       <Header />
-      <Banner />
+      <Banner>
+        <Carousel />
+      </Banner>
       <Navigation />
       <BodyWrapper>
         <Sidebar />

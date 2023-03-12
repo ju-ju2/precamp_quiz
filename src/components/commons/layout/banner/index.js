@@ -5,6 +5,6 @@ const Wrapper = styled.div`
   background-color: pink;
 `;
 
-export default function Banner() {
-  return <Wrapper>베너영역</Wrapper>;
+export default function Banner(props) {
+  return <Wrapper>{props.children}</Wrapper>;
 }
