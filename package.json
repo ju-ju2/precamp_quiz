@@ -25,6 +25,7 @@
     "react-slick": "^0.29.0"
   },
   "devDependencies": {
+    "@types/react-slick": "^0.23.10",
     "slick-carousel": "^1.8.1"
   }
 }
