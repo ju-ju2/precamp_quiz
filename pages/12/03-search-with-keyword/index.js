@@ -24,7 +24,7 @@ const Column = styled.div`
 `;
 export default function SearchKeywordPage() {
   const [startNum, setStartNum] = useState(1);
-  const [search, setSearch] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   const { data, refetch } = useQuery(FETCH_BOARDS);
 
@@ -35,6 +35,7 @@ export default function SearchKeywordPage() {
 
   const getDebounce = _.debounce((value) => {
     refetch({ search: value, page: 1 });
+    setKeyword(value);
   }, 500);
   const onChangeSearch = (event) => {
     getDebounce(event.target.value);
@@ -49,7 +50,16 @@ export default function SearchKeywordPage() {
       {data?.fetchBoards.map((el, index) => (
         <Row key={index}>
           <Column>{el.writer}</Column>
-          <Column>{el.title}</Column>
+          <Column>
+            {el.title
+              .replaceAll(keyword, `!@#$${keyword}!@#$`)
+              .split("!@#$")
+              .map((el) => (
+                <span style={{ color: el === keyword ? "blue" : "black" }}>
+                  {el}
+                </span>
+              ))}
+          </Column>
         </Row>
       ))}
       <Row style={{ fontWeight: "bold", marginTop: "20px" }}>

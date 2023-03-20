@@ -1,7 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import { useState } from "react";
-import _ from "lodash";
 
 const FETCH_BOARDS = gql`
   query typesetting($page: Int, $search: String) {
@@ -33,15 +32,16 @@ export default function SearchKeywordPage() {
     refetch({ page: Number(event.target.id) });
   };
 
-  const getDebounce = _.debounce((value) => {
-    refetch({ search: value, page: 1 });
-  }, 500);
   const onChangeSearch = (event) => {
-    getDebounce(event.target.value);
+    setSearch(event.target.value);
+  };
+  const onClickButton = () => {
+    refetch({ search });
   };
   return (
     <>
       검색어: <input onChange={onChangeSearch} />
+      <button onClick={onClickButton}>검색하기</button>
       <Row style={{ color: "orange" }}>
         <Column>제목</Column>
         <Column>내용</Column>
