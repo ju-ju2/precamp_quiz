@@ -1,7 +1,7 @@
 export default function LoginSuccessPage() {
   return (
     <>
-      <div></div>
+      <div>짠</div>
     </>
   );
 }

@@ -1,5 +1,7 @@
 import { accessTokenState } from "@/src/commons/store";
 import { gql, useMutation } from "@apollo/client";
+import { Modal } from "antd";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 
@@ -19,6 +21,8 @@ export default function LoginPage() {
 
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
+  const router = useRouter();
+
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
   };
@@ -34,8 +38,15 @@ export default function LoginPage() {
     });
     console.log(result);
     const accessToken = result.data?.loginUser.accessToken;
+
+    if (!accessToken) {
+      Modal.error({ content: "로그인 정보 없음" });
+      return;
+    }
     setAccessToken(accessToken);
+    router.push("./LoginSuccess");
   };
+
   return (
     <>
       이메일 : <input onChange={onChangeEmail} type="text" />
