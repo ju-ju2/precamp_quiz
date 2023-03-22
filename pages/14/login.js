@@ -1,5 +1,7 @@
+import { accessTokenState } from "@/src/commons/store";
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
 
 const LOGIN_USER = gql`
   mutation groupName($email: String!, $password: String!) {
@@ -15,6 +17,8 @@ export default function LoginPage() {
 
   const [loginUser] = useMutation(LOGIN_USER);
 
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
   };
@@ -29,6 +33,8 @@ export default function LoginPage() {
       },
     });
     console.log(result);
+    const accessToken = result.data?.loginUser.accessToken;
+    setAccessToken(accessToken);
   };
   return (
     <>
