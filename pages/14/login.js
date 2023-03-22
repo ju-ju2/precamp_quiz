@@ -44,7 +44,7 @@ export default function LoginPage() {
       return;
     }
     setAccessToken(accessToken);
-    router.push("./LoginSuccess");
+    router.push("./loginSuccess");
   };
 
   return (
