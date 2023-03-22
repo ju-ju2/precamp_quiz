@@ -12,6 +12,9 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
+import { RecoilRoot } from "recoil";
+
+const GLOBAL_STATE = new InMemoryCache();
 
 export default function App({ Component, pageProps }) {
   const upLoadLink = createUploadLink({
@@ -20,12 +23,15 @@ export default function App({ Component, pageProps }) {
   const client = new ApolloClient({
     // uri: "http://practice.codebootcamp.co.kr/graphql",
     link: ApolloLink.from([upLoadLink]),
-    cache: new InMemoryCache(),
+    // cache: new InMemoryCache(),
+    cache: GLOBAL_STATE,
   });
 
   return (
-    <ApolloProvider client={client}>
-      <Component {...pageProps} />
-    </ApolloProvider>
+    <RecoilRoot>
+      <ApolloProvider client={client}>
+        <Component {...pageProps} />
+      </ApolloProvider>
+    </RecoilRoot>
   );
 }
