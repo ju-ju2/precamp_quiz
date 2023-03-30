@@ -12,8 +12,8 @@ const FETCH_USER_LOGGED_IN = gql`
 `;
 
 export default function LoginSuccessPage() {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState("?");
+  const [name, setName] = useState("?");
   const client = useApolloClient();
   const onClickButton = async () => {
     const result = await client.query({
@@ -26,8 +26,8 @@ export default function LoginSuccessPage() {
   return (
     <>
       <button onClick={onClickButton}>API 요청하기</button>
-      <div>사용자의 이메일은 {email}입니다.</div>
-      <div>사용자의 이름은 {name}입니다.</div>
+      <div>사용자의 이메일은 {email} 입니다.</div>
+      <div>사용자의 이름은 {name} 입니다.</div>
     </>
   );
 }
